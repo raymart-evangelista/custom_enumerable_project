@@ -10,16 +10,16 @@ module Enumerable
 
   def my_select(&blk)
     matched_elems = []
-    my_each do |idx|
-      matched_elems.push(idx) if blk.call(idx)
+    my_each do |elem|
+      matched_elems.push(elem) if blk.call(elem)
     end
     matched_elems
   end
 
   def my_all?(&blk)
     met_conditions = false
-    my_each do |idx|
-      met_conditions = if blk.call(idx)
+    my_each do |elem|
+      met_conditions = if blk.call(elem)
                          true
                        else
                          false
@@ -29,8 +29,8 @@ module Enumerable
   end
 
   def my_any?(&blk)
-    my_each do |idx|
-      if blk.call(idx)
+    my_each do |elem|
+      if blk.call(elem)
         return true
       end
     end
@@ -38,8 +38,8 @@ module Enumerable
   end
 
   def my_none?(&blk)
-    my_each do |idx|
-      if blk.call(idx)
+    my_each do |elem|
+      if blk.call(elem)
         return false
       end
     end
@@ -49,8 +49,8 @@ module Enumerable
   def my_count(&blk)
     count = 0
     if block_given?
-      my_each do |idx|
-        count += 1 if blk.call(idx)
+      my_each do |elem|
+        count += 1 if blk.call(elem)
       end
     else
       my_each { count += 1 }
@@ -60,15 +60,15 @@ module Enumerable
 
   def my_map(&blk)
     new_arr = []
-    my_each do |idx|
-      new_arr.push(blk.call(idx))
+    my_each do |elem|
+      new_arr.push(blk.call(elem))
     end
     new_arr
   end
 
   def my_inject(value, &blk)
-    my_each do |idx|
-      value = blk.call(idx, value)
+    my_each do |elem|
+      value = blk.call(elem, value)
     end
     value
   end
